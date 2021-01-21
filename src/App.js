@@ -1,23 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useContext} from 'react';
+import { Table } from 'react-bootstrap';
+import { ProductList } from './components/ProductList';
+import { GlobalContext, GlobalProvider } from './context/GlobalState';
+import { Summary } from './components/Summary';
+import { Button } from './components/Button';
 
 function App() {
+  const { products } = useContext(GlobalContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <GlobalProvider>
+        <div className="jumbotron center main-container">          
+          <h3 className="title">Products List</h3>
+          <Table className="striped bordered hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Count</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ProductList products={products}/>         
+            </tbody>
+          </Table>
+          <Button/>
+          <Summary/>
+        </div>
+      </GlobalProvider>
     </div>
   );
 }
