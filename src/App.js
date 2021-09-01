@@ -17,8 +17,8 @@ function App() {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Count</th>
-                <th>Price</th>
+                <th>Counts</th>
+                <th>Prices</th>
               </tr>
             </thead>
             <tbody>
