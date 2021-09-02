@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import StartIcon from './icons/StartIcon';
 import EndIcon from './icons/EndIcon';
 import { lochmara, frenchGray, pistachio } from './icons/Constants/Constants';
@@ -7,14 +7,11 @@ import PathLine from './icons/PathLine';
 import CircleIcon from './icons/CircleIcon';
 
 const App = () => {
-  
+
   const [fill, setFill] = useState(lochmara);
-  
-  const [fillCircle, setFillCircle] = useState(lochmara)
+  const [fillCircle, setFillCircle] = useState(lochmara);
 
   const toggle = () => {
-    console.log("🚀 ~ file: App.js ~ line 15 ~ changeColor ~ fill", fill)
-
     if (fill === lochmara) {
       setFill(frenchGray);
     } else if (fill === frenchGray) {
@@ -22,32 +19,61 @@ const App = () => {
     }
   }
 
-  
   const toggleCircle = () => {
-    console.log("🚀 ~ file: App.js ~ line 15 ~ changeColor ~ fill", fill)
-
     if (fillCircle === lochmara) {
       setFillCircle(pistachio);
     } else if (fillCircle === pistachio) {
       setFillCircle(lochmara);
     }
   }
-  
-  // onClick={() => changeColor()}
-  return (
 
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      // width="280mm"
-      // height="297mm"
-      // version="1.1"
-      // viewBox="0 0 280 297" 
+  const startIconX = 77
+  const firstPathX = 140;
+  const startCircleC = 205;
+  const step = 80;
+  const yAxis = 138.5;
+  const circleRadius = 15;
+  const circleWidth = circleRadius * 2;
+  const lineLength = 50;
+
+
+
+  let pathStarts = [firstPathX, firstPathX + step, firstPathX + step * 2, firstPathX + step * 3, firstPathX + step * 4, firstPathX + step * 5];
+  let circleStartC = [startCircleC, startCircleC + step, startCircleC + step * 2, startCircleC + step * 3, startCircleC + step * 4];
+
+  // should be "nr of paths * length of paths" by adding "nr of circles * 30" by adding startX of start icon
+  // 
+  let xOfEnd = (pathStarts.length * lineLength) + (circleStartC.length * circleWidth) + firstPathX;
+
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
       className="main-container"
     >
-      <StartIcon fillColor={fill} toggleColor={toggle}/>
-      <EndIcon fillColor={fill} toggleColor={toggle}/>
-      <PathLine strokeColor={fill} toggleStroke={toggle}/>
-      <CircleIcon fillColor={fillCircle} toggleColor={toggleCircle}/>
+      <StartIcon fillColor={fill} toggleColor={toggle} x={startIconX} y={yAxis - 13.5} />
+      <EndIcon fillColor={fill} toggleColor={toggle} x={xOfEnd} y={yAxis + 11.5} />
+
+      {pathStarts.map(ps =>
+        <PathLine strokeColor={fill} toggleStroke={toggle} startX={ps} startY={yAxis} length={lineLength} />
+      )};
+
+      {circleStartC.map(stc =>
+        <CircleIcon fillColor={fillCircle} toggleColor={toggleCircle} cx={stc} cy={yAxis} r={circleRadius} />
+      )}
+
+
+      {/* <CircleIcon fillColor={fillCircle} toggleColor={toggleCircle} cx={205} cy={138.5} r={15} />
+  
+        <CircleIcon fillColor={fillCircle} toggleColor={toggleCircle} cx={285} cy={138.5} r={15} /> */}
+
+
+      {/* startX should be "startX of the first path" + "length of first line" + "2 * r of the circle" --- for ex. 140 + 50 + 2*15 = 230 */}
+
+      {/* <PathLine strokeColor={fill} toggleStroke={toggle} startX={220} startY={138.5} length={50}/> */}
+
+      {/* <CircleIcon fillColor={fillCircle} toggleColor={toggleCircle}/> */}
+
+
+
     </svg>
   );
 }

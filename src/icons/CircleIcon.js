@@ -2,17 +2,15 @@ import React from 'react';
 import { lochmara, frenchGray, white, spindle } from "./Constants/Constants";
 
 
-const CircleIcon = ({ fillColor = lochmara, textColor = white, toggleColor }) => {
+const CircleIcon = ({ fillColor = lochmara, textColor = white, toggleColor, cx = 215, cy = 138.5, r = 15 }) => {
     return (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg>
             <g fillOpacity="1" onClick={toggleColor}
                 style={{ cursor: "pointer" }}>
                 <circle
-                    cx="87.618"
-                    cy="255.821"
-                    r="13.744"
+                    cx={cx}
+                    cy={cy}
+                    r={r}
                     fill={fillColor}
                     stroke={fillColor === lochmara ? spindle : "none"}
                     strokeDasharray="none"
@@ -23,8 +21,8 @@ const CircleIcon = ({ fillColor = lochmara, textColor = white, toggleColor }) =>
                 <text
                     xmlSpace="preserve"
                     style={{ lineHeight: "1.25" }}
-                    x="80.118"
-                    y="259.765"
+                    x={cx-7.5}
+                    y={cy+3.8}
                     fill={white}
                     fontFamily="sans-serif"
                     fontSize="10.583"

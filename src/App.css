@@ -35,8 +35,11 @@
     align-items: center;
     text-align: center;
     justify-content: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     margin: 7px;
+    
+    width: 900px;
+    height: 500px;
     font-family: 'Lato', sans-serif;
 }
 

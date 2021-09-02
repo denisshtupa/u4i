@@ -2,25 +2,18 @@ import { lochmara, frenchGray } from './Constants/Constants';
 import React from 'react';
 
 
-const PathLine = ({ strokeColor = lochmara, toggleStroke, source = "77.976", target = "230.61",  length = "h122.271" }) => {
+const PathLine = ({ strokeColor = lochmara, toggleStroke, startX = 140, startY = 138.5, length = 60, ...props }) => {
 
     return (
 
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg>
             <g onClick={toggleStroke} style={{ cursor: "pointer" }}>
                 <path
-                    fill="none"
-                    fillOpacity="1"
                     stroke={strokeColor}
-                    strokeDasharray="none"
-                    strokeLinecap="butt"
-                    strokeLinejoin="miter"
                     strokeMiterlimit="4"
-                    strokeOpacity="1"
-                    strokeWidth="2"
-                    d={"M" + source + " " + target + length}
+                    strokeOpacity="0.9"
+                    strokeWidth="2.2"
+                    d={"M" + startX + " " + startY + "h" + length}
                 ></path>
             </g>
         </svg>
