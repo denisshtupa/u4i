@@ -1,35 +1,58 @@
-import React from 'react';
-import { lochmara, frenchGray, white, spindle } from "./Constants/Constants";
+import React, { useEffect, useState } from 'react';
+import { lochmara, white, fontFamily, fontSize, spindle } from "./Constants/Constants";
 
+const CircleIcon = ({ fillColor = lochmara, textColor = white, percentage = 80, circleNumber = "1", toggleColor, cx = 215, cy = 138.5, r = 15 }) => {
 
-const CircleIcon = ({ fillColor = lochmara, textColor = white, toggleColor, cx = 215, cy = 138.5, r = 15 }) => {
+    const circleWeek = "W";
+    
+    let perc = Math.floor(Math.random() * 90) + 1;
+
+    const [opacity, setOpacity] = useState(false);
+
+    const handleOpacity = () => {
+        opacity ? setOpacity(false) : setOpacity(true);
+    }
+
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         progressB();
+    //     }, 1000);
+    // },[])
+
     return (
-        <svg>
-            <g fillOpacity="1" onClick={toggleColor}
-                style={{ cursor: "pointer" }}>
+        <svg >
+            <g onClick={toggleColor} onMouseEnter={handleOpacity} onMouseLeave={handleOpacity} style={{ cursor: "pointer", ...(opacity && { opacity: 0.8 }) }}>
                 <circle
+
                     cx={cx}
                     cy={cy}
                     r={r}
                     fill={fillColor}
                     stroke={fillColor === lochmara ? spindle : "none"}
-                    strokeDasharray="none"
-                    strokeMiterlimit="0"
-                    strokeOpacity="0.3"
-                    strokeWidth="5"
-                ></circle>
-                <text
-                    xmlSpace="preserve"
-                    style={{ lineHeight: "1.25" }}
-                    x={cx-7.5}
-                    y={cy+3.8}
-                    fill={white}
-                    fontFamily="sans-serif"
-                    fontSize="10.583"
-                    fontStyle="normal"
-                    fontWeight="normal"
+                    // strokeLinecap="round"
+                    // strokeOpacity="1"
+                    strokeWidth="3"
+                    strokeDasharray={`${perc}, 200`}
+                    // strokeDashoffset={80}
+                    transform={`rotate(-90 ${cx} ${cy})`}
                 >
-                    W3
+                    <animate
+                        attributeName="stroke-dasharray"
+                        values={`0 314;${perc} 200`}
+                        dur="2s"
+                        fill="freeze" />
+                </circle>
+
+                <text
+                    style={{ lineHeight: "1.25" }}
+                    x={circleNumber > 9 ? cx - 10 : cx - 7.7}
+                    y={cy + 3.1}
+                    fill={textColor}
+                    fontFamily={fontFamily}
+                    fontSize={fontSize}
+                    letterSpacing="0.5px"
+                >
+                    {`${circleWeek}${circleNumber}`}
                 </text>
             </g>
         </svg>

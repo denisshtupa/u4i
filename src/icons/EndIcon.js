@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { lochmara, frenchGray, white } from "./Constants/Constants";
+import React from "react";
+import { frenchGray, white, fontFamily, fontSize } from "./Constants/Constants";
 
 const EndIcon = ({ fillColor = frenchGray, textColor = frenchGray, toggleColor, x = 430, y = 150 }) => {
 
@@ -14,32 +14,24 @@ const EndIcon = ({ fillColor = frenchGray, textColor = frenchGray, toggleColor, 
     return (
 
         <svg>
-            <g strokeWidth="0.265" fillOpacity="1" onClick={toggleColor}
+            <g onClick={toggleColor}
                 style={{ cursor: "pointer" }}
             >
-                {/* Clicking inside the path.  handle event ???? */}
                 <path
-                    fill="none"
+                    fill={white}
                     stroke={fillColor}
                     d={rectangle}
-
                 ></path>
                 <path
                     fill={fillColor}
-                    stroke="none"
                     d={triangle}
                 ></path>
                 <text
-                    xmlSpace="preserve"
-                    style={{ lineHeight: "1.25" }}
-                    x={x+18}
+                    x={x+21}
                     y={y-9}
                     fill={textColor}
-                    stroke="none"
-                    fontFamily="sans-serif"
-                    fontSize="10.583"
-                    fontStyle="normal"
-                    fontWeight="normal"
+                    fontFamily={fontFamily}
+                    fontSize={fontSize}
                 > End
                 </text>
             </g>
