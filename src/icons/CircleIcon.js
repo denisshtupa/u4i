@@ -1,29 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { lochmara, white, fontFamily, fontSize, spindle } from "./Constants/Constants";
 
-const CircleIcon = ({ fillColor = lochmara, textColor = white, percentage = 80, circleNumber = "1", toggleColor, cx = 215, cy = 138.5, r = 15 }) => {
-
-    const circleWeek = "W";
-    
-    let perc = Math.floor(Math.random() * 90) + 1;
-
+const CircleIcon = ({ fillColor = lochmara, textColor = white, weekId = 1, percentage = 80, circleNumber = "1", toggleColor, cx = 215, cy = 138.5, r = 15 }) => {
     const [opacity, setOpacity] = useState(false);
 
+    const circleWeek = "W";
+    const random = Math.floor(Math.random() * 99) + 1;
+    
     const handleOpacity = () => {
         opacity ? setOpacity(false) : setOpacity(true);
     }
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         progressB();
-    //     }, 1000);
-    // },[])
-
     return (
         <svg >
-            <g onClick={toggleColor} onMouseEnter={handleOpacity} onMouseLeave={handleOpacity} style={{ cursor: "pointer", ...(opacity && { opacity: 0.8 }) }}>
+            <g onClick={() => toggleColor(weekId, cx, cy)} id={weekId} onMouseEnter={handleOpacity} onMouseLeave={handleOpacity} style={{ cursor: "pointer", ...(opacity && { opacity: 0.8 }) }}>
                 <circle
-
                     cx={cx}
                     cy={cy}
                     r={r}
@@ -32,13 +23,13 @@ const CircleIcon = ({ fillColor = lochmara, textColor = white, percentage = 80, 
                     // strokeLinecap="round"
                     // strokeOpacity="1"
                     strokeWidth="3"
-                    strokeDasharray={`${perc}, 200`}
+                    strokeDasharray={`${random}, 200`}
                     // strokeDashoffset={80}
                     transform={`rotate(-90 ${cx} ${cy})`}
                 >
                     <animate
                         attributeName="stroke-dasharray"
-                        values={`0 314;${perc} 200`}
+                        values={`0 314;${random} 200`}
                         dur="2s"
                         fill="freeze" />
                 </circle>

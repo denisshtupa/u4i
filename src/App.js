@@ -6,27 +6,15 @@ import { lochmara, frenchGray, pistachio } from './icons/Constants/Constants';
 import PathLine from './icons/PathLine';
 import CircleIcon from './icons/CircleIcon';
 import StartIconG from './icons/StartIconG';
+import PlayIcon from './icons/PlayIcon';
+import WeekContent from './icons/WeekContent';
 
 const App = () => {
 
   const [fill, setFill] = useState(lochmara);
   const [fillCircle, setFillCircle] = useState(lochmara);
-
-  const toggle = () => {
-    if (fill === lochmara) {
-      setFill(frenchGray);
-    } else if (fill === frenchGray) {
-      setFill(lochmara);
-    }
-  }
-
-  const toggleCircle = () => {
-    if (fillCircle === lochmara) {
-      setFillCircle(pistachio);
-    } else if (fillCircle === pistachio) {
-      setFillCircle(lochmara);
-    }
-  }
+  const [weekTopics, setWeekTopics] = useState([]);
+  const [WeekId, setWeekId] = useState(null);
 
   const startIconX = 78;
   const firstPathX = 140;
@@ -36,13 +24,124 @@ const App = () => {
   const circleRadius = 15;
   const circleWidth = circleRadius * 2;
   const lineLength = 50;
+  let xAxisWeekTopics;
+  let yAxisWeekTopics;
+  
+  let weekObjects = [];
 
-  let pathStarts = [firstPathX, firstPathX + step, firstPathX + step * 2, firstPathX + step * 3, firstPathX + step * 4, firstPathX + step * 5];
-  let circleStartC = [startCircleC, startCircleC + step, startCircleC + step * 2, startCircleC + step * 3, startCircleC + step * 4];
+  const pathStarts = [firstPathX, firstPathX + step, firstPathX + step * 2, firstPathX + step * 3, firstPathX + step * 4, firstPathX + step * 5];
+  let circleStartC = [
+    {
+      startCircleC: startCircleC,
+      weekId: 111
+    },
+    {
+      startCircleC: startCircleC + step,
+      weekId: 222
+    },
+    {
+      startCircleC: startCircleC + step * 2,
+      weekId: 333
+    },
+    {
+      startCircleC: startCircleC + step * 3,
+      weekId: 444
+    },
+    {
+      startCircleC: startCircleC + step * 4,
+      weekId: 555
+    }
+  ];
 
   // should be "nr of paths * length of paths" by adding "nr of circles * 30" by adding startX of start icon
   // 
   let xOfEnd = (pathStarts.length * lineLength) + (circleStartC.length * circleWidth) + firstPathX;
+
+
+  useEffect(() => {
+    if (weekObjects.length === 0) {
+      console.log("🚀 ~ file: App.js ~ line 19 ~ useEffect ~ weekObjects", weekObjects)
+      setTimeout(() => {
+        fillWeekObjects(circleStartC);
+      }, 500);
+    }
+  }, [])
+
+  const toggle = () => {
+    if (fill === lochmara) {
+      setFill(frenchGray);
+    } else if (fill === frenchGray) {
+      setFill(lochmara);
+    }
+  }
+
+  const toggleCircle = (weekId, cx, cy) => {
+    
+    if (weekTopics.length === 0) {
+      setWeekTopics(weekObjects);
+    }
+ 
+    if(WeekId !== weekId) {
+      const updatedWeekObjects = [...weekTopics];
+        updatedWeekObjects.map(x=> x.visible = false)
+  
+        let index = updatedWeekObjects.findIndex(u => u.weekId === weekId);
+        updatedWeekObjects[index].visible = true;
+        
+        setWeekTopics(updatedWeekObjects);
+        setFillCircle(pistachio);
+    }
+    
+    else {
+      if (fillCircle === lochmara) {
+
+        const updatedWeekObjects = [...weekTopics];
+        updatedWeekObjects.map(x=> x.visible = false)
+  
+        let index = updatedWeekObjects.findIndex(u => u.weekId === weekId);
+        updatedWeekObjects[index].visible = true;
+        
+        setWeekTopics(updatedWeekObjects);
+  
+        setFillCircle(pistachio);
+  
+      } else if (fillCircle === pistachio) {
+  
+        const updatedWeekObjects = [...weekTopics];
+        updatedWeekObjects.map(x=> x.visible = false)
+  
+        let index = updatedWeekObjects.findIndex(u => u.weekId === weekId);
+        updatedWeekObjects[index].visible = false;
+  
+        setWeekTopics(updatedWeekObjects);
+  
+        setFillCircle(lochmara);
+      }
+    }
+    
+    setWeekId(weekId);
+  }
+
+
+
+  const fillWeekObjects = (circleC) => {
+    circleC.forEach(cs => {
+      const weekObject = {
+        xAxisCenter: cs.startCircleC,
+        visible: false,
+        yAxisCenter: yAxis,
+        weekId: cs.weekId,
+      };
+
+      weekObjects.push(weekObject)
+    })
+    console.log("🚀 ~ file: App.js ~ line 111 ~ fillWeekObjects ~ weekObjects", weekObjects)
+
+    setWeekTopics(weekObjects);
+
+  }
+
+
 
   return (
 
@@ -52,12 +151,21 @@ const App = () => {
       <EndIcon fillColor={fill} toggleColor={toggle} x={xOfEnd} y={yAxis + 11.5} />
 
       {pathStarts.map((ps, index) =>
-        <PathLine key={index+1} strokeColor={fill} toggleStroke={toggle} startX={ps} startY={yAxis} length={lineLength} />
+        <PathLine key={index + 1} strokeColor={fill} toggleStroke={toggle} startX={ps} startY={yAxis} length={lineLength} />
       )};
 
-      {circleStartC.map((stc, index) =>
-        <CircleIcon key={index+1} fillColor={fillCircle} toggleColor={toggleCircle} circleNumber={index+7} cx={stc} cy={yAxis} r={circleRadius} />
+      {circleStartC.map((stc, order) =>
+        <CircleIcon key={stc.weekId} fillColor={fillCircle} weekId={stc.weekId} toggleColor={toggleCircle} circleNumber={order + 7} cx={stc.startCircleC} cy={yAxis} r={circleRadius} />
       )}
+
+
+      {
+        weekTopics.some(item => item.visible) && 
+        <WeekContent startX={weekTopics.find(el => el.visible === true).xAxisCenter} startY={weekTopics.find(el => el.visible === true).yAxisCenter + circleRadius} />
+      }
+      
+
+
 
 
       {/* <CircleIcon fillColor={fillCircle} toggleColor={toggleCircle} cx={205} cy={138.5} r={15} />
@@ -72,9 +180,9 @@ const App = () => {
       {/* <CircleIcon fillColor={fillCircle} toggleColor={toggleCircle}/> */}
 
     </svg>
-    
-    
-    
+
+
+
     // <div style={{
     //   height: "500px",
     //   width: "700px",
