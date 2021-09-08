@@ -1,33 +1,23 @@
-import { useEffect } from "react";
-
 const UseScript = (url, dataId, container) => {
-    let js3qInstance;
+    const script = document.createElement('script');
 
-    useEffect(() => {
-        const script = document.createElement('script');
+    script.src = url;
+    script.async = true;
+    script.type = `text/javascript`;
 
-        script.src = url;
-        script.async = true;
-        script.type = `text/javascript`;
+    script.onload = () => {
+        new window.js3q({
+            dataid: dataId,
+            container: container,
+            layout: "default",
+            width: "80%",
+            height: "50%",
+            controlBarAutoHide: false
+        });
+    }
+    console.log("🚀 ~ file: UseScript.js ~ line 8 ~ //useEffect ~ script", script)
 
-        script.onload = () => {
-            new window.js3q({
-                dataid: dataId,
-                container: container,
-                layout: "default",
-                width:"80%",
-                height:"50%",
-                controlBarAutoHide: false
-            });
-        }
-
-        document.body.appendChild(script);
-
-        return () => {
-            document.body.removeChild(script);
-        }
-    }, [url])
-
+    return script;
 }
 
 export default UseScript
