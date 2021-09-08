@@ -18,14 +18,14 @@
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .main-container {
-    width: 99%
+    width: 70%
   }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .main-container {
-    width: 99%
+    width: 70%
   }
 }
 
@@ -36,7 +36,8 @@
     text-align: center;
     justify-content: center;
     min-height: 100vh;
-    margin: 7px;
+    margin: 10px;
+    padding:20px;
     font-family: 'Lato', sans-serif;
 }
 
