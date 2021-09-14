@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { lochmara, white, fontFamily, fontSize, spindle } from "./Constants/Constants";
 
 const CircleIcon = ({ fillColor = lochmara, textColor = white, weekId = 1, percentage = 80, circleNumber = "1", toggleColor, cx = 215, cy = 138.5, r = 15 }) => {
@@ -20,11 +20,8 @@ const CircleIcon = ({ fillColor = lochmara, textColor = white, weekId = 1, perce
                     r={r}
                     fill={fillColor}
                     stroke={fillColor === lochmara ? spindle : "none"}
-                    // strokeLinecap="round"
-                    // strokeOpacity="1"
                     strokeWidth="3"
                     strokeDasharray={`${random}, 200`}
-                    // strokeDashoffset={80}
                     transform={`rotate(-90 ${cx} ${cy})`}
                 >
                     <animate
