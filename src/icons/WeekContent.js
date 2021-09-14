@@ -3,6 +3,7 @@ import { pistachio, white } from './Constants/Constants';
 import LabIcon from './LabIcon';
 import PathLine from './PathLine';
 import PlayIcon from './PlayIcon';
+import TextSvg from './TextSvg';
 import UsersAvatarIcon from './UsersAvatarIcon';
 
 const WeekContent = ({ strokeColor = pistachio, startX, startY, numberOfTopics = 5 }) => {
@@ -41,13 +42,13 @@ const WeekContent = ({ strokeColor = pistachio, startX, startY, numberOfTopics =
         
         switch (randomNumber) {
             case 1:
-                return <PlayIcon key={icon.index} cx={startX} cy={startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index} strokeColor={fill} toggleColor={toggle} />
+                return (<><PlayIcon key={icon.index} cx={startX} cy={startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index} strokeColor={fill} toggleColor={toggle} /> <TextSvg x={startX - 60} y={(startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index) + 3} key={icon.index * 10} /> </>);
             case 2:
-                return <UsersAvatarIcon key={icon.index} cx={startX} cy={startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index} strokeColor={fill} toggleColor={toggle} />
+                return (<><UsersAvatarIcon key={icon.index} cx={startX} cy={startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index} strokeColor={fill} toggleColor={toggle} /> <TextSvg x={startX - 60} y={(startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index) + 3} text={`${random() * randomNumber * 4} min`} key={icon.index * 12} /> </>);
             case 3:
-                return <LabIcon key={icon.index} cx={startX} cy={startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index} strokeColor={fill} toggleColor={toggle} />
+                return (<><LabIcon key={icon.index} cx={startX} cy={startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index} strokeColor={fill} toggleColor={toggle} /> <TextSvg x={startX - 60} y={(startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index) + 3} text={`45min`} key={icon.index * 13} /> </>);
             default:
-                return <PlayIcon key={icon.index} cx={startX} cy={startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index} strokeColor={fill} toggleColor={toggle} />
+                return (<><PlayIcon key={icon.index} cx={startX} cy={startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index} strokeColor={fill} toggleColor={toggle} /> <TextSvg x={startX - 60} y={(startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index) + 3} key={icon.index * 11}/> </>);
         }
     }
 
