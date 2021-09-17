@@ -7,6 +7,8 @@ import PathLine from './icons/PathLine';
 import CircleIcon from './icons/CircleIcon';
 import StartIconG from './icons/StartIconG';
 import WeekContent from './icons/WeekContent';
+import LeftArrow from './icons/LeftArrow';
+import RightArrow from './icons/RightArrow';
 
 
 const randomNumber = Math.floor(Math.random() * 8) + 3;
@@ -25,7 +27,7 @@ const circleForWeeksCalc = (startCircleC, step) => {
   for (var i = 0; i < randomNumber; i++) {
     let circleC = {
       startCircleC: startCircleC + step * i,
-      weekId: i + 100
+      weekId: 10000 + i
     }
     circleStartC.push(circleC);
   }
@@ -133,6 +135,29 @@ const App = () => {
     })
     setWeekTopics(weekObjects);
   }
+  
+  const previousWeekHandle = () => {
+    const updatedWeekObjects = [...weekTopics];
+    // updatedWeekObjects.map(x => x.visible = false)
+
+    let index = updatedWeekObjects.findIndex(u => u.visible === true);
+    updatedWeekObjects[index].visible = false;
+    updatedWeekObjects[index-1].visible = true;
+
+    setWeekTopics(updatedWeekObjects);
+  }
+  
+  const nextWeekHandle = () => {
+    const updatedWeekObjects = [...weekTopics];
+    // updatedWeekObjects.map(x => x.visible = false)
+
+    let index = updatedWeekObjects.findIndex(u => u.visible === true);
+    updatedWeekObjects[index].visible = false;
+    updatedWeekObjects[index+1].visible = true;
+    
+
+    setWeekTopics(updatedWeekObjects);
+  }
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className="main-container"
@@ -145,18 +170,22 @@ const App = () => {
       )};
 
       {circleStartC.map((stc, order) =>
-        <CircleIcon key={stc.weekId} fillColor={fillCircle} weekId={stc.weekId} toggleColor={toggleCircle} circleNumber={order +1} cx={stc.startCircleC} cy={yAxis} r={circleRadius} />
+        <CircleIcon key={stc.weekId} fillColor={fillCircle} weekId={stc.weekId} toggleColor={toggleCircle} circleNumber={order + 1} cx={stc.startCircleC} cy={yAxis} r={circleRadius} />
       )}
 
       {
         weekTopics.some(item => item.visible) &&
-        <WeekContent startX={weekTopics.find(el => el.visible === true).xAxisCenter} startY={weekTopics.find(el => el.visible === true).yAxisCenter + circleRadius} numberOfTopics={randomNumber > 7 ? randomNumber - 3 : randomNumber} />
+        <>
+          <WeekContent startX={weekTopics.find(el => el.visible === true).xAxisCenter} startY={weekTopics.find(el => el.visible === true).yAxisCenter + circleRadius} numberOfTopics={randomNumber > 4 ? randomNumber - 3 : randomNumber} />
+          {weekTopics.some(it => it.visible && it.weekId > 10000) && <LeftArrow x={startIconX - 15} y={150} onPreviousWeek={previousWeekHandle}/>}
+          {weekTopics.some(it => it.visible && it.weekId < (10000 + weekTopics.length-1)) && <RightArrow x={xOfEnd + 70} y={150} onNextWeek={nextWeekHandle}/>}
+        </>
       }
 
+
+
+
     </svg>
-
-
-
 
 
     // <div style={{
