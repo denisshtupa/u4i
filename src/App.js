@@ -1,35 +1,26 @@
-import './App.css';
-import React, {useContext} from 'react';
-import { Table } from 'react-bootstrap';
-import { ProductList } from './components/ProductList';
-import { GlobalContext, GlobalProvider } from './context/GlobalState';
-import { Summary } from './components/Summary';
-import { Button } from './components/Button';
+import React from 'react';
+import { Fragment } from 'react';
+import { MultipleChoice } from 'react-qti';
 
 function App() {
-  const { products } = useContext(GlobalContext);
   return (
-    <div>
-      <GlobalProvider>
-        <div className="jumbotron center main-container">          
-          <h3 className="title">Products List</h3>
-          <Table className="striped bordered hover">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Counts</th>
-                <th>Prices</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ProductList products={products}/>         
-            </tbody>
-          </Table>
-          <Button/>
-          <Summary/>
-        </div>
-      </GlobalProvider>
-    </div>
+    <>
+      <h4>qti</h4>
+      <MultipleChoice  path="/multiple-choice.xml" as="div">
+        <MultipleChoice.Exercise>
+          {({prompt}) => (
+            <Fragment>
+              <h1>{prompt}</h1>
+              <MultipleChoice.Choice />
+              {          console.log("🚀 ~ file: App.js ~ line 11 ~ App ~ prompt", prompt)
+}
+            </Fragment>
+            
+          )}
+        </MultipleChoice.Exercise>
+        {/* <MultipleChoice.Button /> */}
+      </MultipleChoice>
+    </>
   );
 }
 
