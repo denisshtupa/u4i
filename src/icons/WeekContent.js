@@ -8,7 +8,7 @@ import ToggleOff from './ToggleOff';
 import ToggleOn from './ToggleOn';
 import UsersAvatarIcon from './UsersAvatarIcon';
 
-const WeekContent = ({ strokeColor = pistachio, startX, startY, numberOfTopics = 5 }) => {
+const WeekContent = ({ strokeColor = pistachio, startX, startY, xOfEnd, numberOfTopics = 5 }) => {
     const [fill, setFill] = useState(pistachio);
 
     const [toggleDetails, setToggleDetails] = useState(false);
@@ -36,6 +36,8 @@ const WeekContent = ({ strokeColor = pistachio, startX, startY, numberOfTopics =
 
         return pathIndexes;
     }
+
+    const yOfToggleButton = startY + circleIconStep * calculateNumberOfPaths().length + circleRadius * calculateNumberOfPaths().length;
 
     const showIcons = () => {
         return calculateNumberOfPaths().map(icon => iconType(icon));
@@ -76,6 +78,9 @@ const WeekContent = ({ strokeColor = pistachio, startX, startY, numberOfTopics =
                 showIcons()
             }
 
+            {/* <LeftTextBox /> */}
+
+
             {/* <LabIcon cx={startX} cy={startY + circleIconStep} strokeColor={fill} toggleColor={toggle} />
 
             <PlayIcon cx={startX} cy={startY + circleIconStep * 2 + circleRadius} strokeColor={fill} toggleColor={toggle} />
@@ -90,21 +95,18 @@ const WeekContent = ({ strokeColor = pistachio, startX, startY, numberOfTopics =
                 )
             }
 
+
+            {/* Toggle section */}
             {
                 <>
-                    {toggleDetails && <ToggleOn onToggleClick={onToggleDetails}/>}
+                    {toggleDetails && (<><ToggleOn x={xOfEnd + 40} y={yOfToggleButton} onToggleClick={onToggleDetails} />
+                        <TextSvg x={xOfEnd + 20} y={yOfToggleButton - 15} text={"Hide details"} key={Math.floor(Math.random() * 30000) + 1} /> </>)}
 
-                    {!toggleDetails && <ToggleOff onToggleClick={onToggleDetails}/>}
+                    {!toggleDetails && (<><ToggleOff x={xOfEnd + 40} y={yOfToggleButton} onToggleClick={onToggleDetails} /> 
+                        <TextSvg x={xOfEnd + 20} y={yOfToggleButton - 15} text={"View details"} key={Math.floor(Math.random() * 30000) + 1} /> </>)}
                 </>
             }
 
-            {/* <PathLine strokeColor={strokeColor} startX={startX} startY={startY}  direction={verticalDirection}></PathLine>
-
-            <PathLine strokeColor={strokeColor} startX={startX} startY={startY + circleIconStep + circleRadius} length={lineLength} direction={verticalDirection}></PathLine>
-
-            <PathLine strokeColor={strokeColor} startX={startX} startY={startY + circleIconStep * 2 + circleRadius * 2} length={lineLength} direction={verticalDirection} optional={true}></PathLine>
-            
-            <PathLine strokeColor={strokeColor} startX={startX} startY={startY + circleIconStep * 3 + circleRadius * 3} length={lineLength} direction={verticalDirection} optional={true}></PathLine> */}
         </svg>
     )
 }
