@@ -54,22 +54,22 @@ const WeekContent = ({ strokeColor = pistachio, startX, startY, xOfEnd, numberOf
             case 1:
                 return (<>
                             <PlayIcon key={Math.floor(Math.random() * 30000) + 1} cx={startX} cy={startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index} strokeColor={fill} toggleColor={toggle} /> 
-                            <TextSvg x={(visibleItem.weekId - 9999) < (numberOfWeeks/2) ? startX - 50 : startX + 20} y={(startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index) + 3} key={Math.floor(Math.random() * 30000) + 1} /> 
+                            <TextSvg x={(visibleItem.weekId - 9999) <= (numberOfWeeks/2) ? startX - 50 : startX + 20} y={(startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index) + 3} key={Math.floor(Math.random() * 30000) + 1} /> 
                         </>);
             case 2:
                 return (<>
                             <UsersAvatarIcon key={Math.floor(Math.random() * 30000) + 1} cx={startX} cy={startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index} strokeColor={fill} toggleColor={toggle} /> 
-                            <TextSvg x={(visibleItem.weekId - 9999) < (numberOfWeeks/2) ? startX - 50 : startX + 20} y={(startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index) + 3} text={`${random() * randomNumber * 4} min`} key={Math.floor(Math.random() * 30000) + 1} /> 
+                            <TextSvg x={(visibleItem.weekId - 9999) <= (numberOfWeeks/2) ? startX - 50 : startX + 20} y={(startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index) + 3} text={`${random() * randomNumber * 4} min`} key={Math.floor(Math.random() * 30000) + 1} /> 
                         </>);
             case 3:
                 return (<>
                             <LabIcon key={Math.floor(Math.random() * 30000) + 1} cx={startX} cy={startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index} strokeColor={fill} toggleColor={toggle} /> 
-                            <TextSvg x={(visibleItem.weekId - 9999) < (numberOfWeeks/2) ? startX - 50 : startX + 20} y={(startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index) + 3} text={`45min`} key={Math.floor(Math.random() * 30000) + 1} /> 
+                            <TextSvg x={(visibleItem.weekId - 9999) <= (numberOfWeeks/2) ? startX - 50 : startX + 20} y={(startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index) + 3} text={`45min`} key={Math.floor(Math.random() * 30000) + 1} /> 
                         </>);
             default:
                 return (<>
                             <PlayIcon key={Math.floor(Math.random() * 30000) + 1} cx={startX} cy={startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index} strokeColor={fill} toggleColor={toggle} /> 
-                            <TextSvg x={(visibleItem.weekId - 9999) < (numberOfWeeks/2) ? startX - 50 : startX + 20} y={(startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index) + 3} key={Math.floor(Math.random() * 30000) + 1} /> 
+                            <TextSvg x={(visibleItem.weekId - 9999) <= (numberOfWeeks/2) ? startX - 50 : startX + 20} y={(startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index) + 3} key={Math.floor(Math.random() * 30000) + 1} /> 
                         </>);
         }
     }
@@ -83,7 +83,7 @@ const WeekContent = ({ strokeColor = pistachio, startX, startY, xOfEnd, numberOf
     
     const detailsBoxDirection = (icon) => {
         debugger
-        if((visibleItem.weekId - 9999) < (numberOfWeeks/2)) {
+        if((visibleItem.weekId - 9999) <= (numberOfWeeks/2)) {
             const startYd = (startY + circleIconStep * (icon.index + 1) + circleRadius * icon.index);
             console.log("🚀 ~ file: WeekContent.js ~ line 75 ~ detailsBoxDirection ~ startYd", startYd);
             return (<RightTextBox x={startX + 25 } y={startYd}/>)
