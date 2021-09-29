@@ -176,7 +176,7 @@ const App = () => {
       {
         weekTopics.some(item => item.visible) &&
         <>
-          <WeekContent startX={weekTopics.find(el => el.visible === true).xAxisCenter} startY={weekTopics.find(el => el.visible === true).yAxisCenter + circleRadius} numberOfTopics={randomNumber > 4 ? randomNumber - 3 : randomNumber} xOfEnd={xOfEnd}/>
+          <WeekContent numberOfWeeks={randomNumber} visibleItem={weekTopics.find(el => el.visible === true)} startX={weekTopics.find(el => el.visible === true).xAxisCenter} startY={weekTopics.find(el => el.visible === true).yAxisCenter + circleRadius} numberOfTopics={randomNumber > 4 ? randomNumber - 3 : randomNumber} xOfEnd={xOfEnd}/>
           {weekTopics.some(it => it.visible && it.weekId > 10000) && <LeftArrow x={startIconX - 15} y={150} onPreviousWeek={previousWeekHandle}/>}
           {weekTopics.some(it => it.visible && it.weekId < (10000 + weekTopics.length-1)) && <RightArrow x={xOfEnd + 70} y={150} onNextWeek={nextWeekHandle}/>}
         </>
