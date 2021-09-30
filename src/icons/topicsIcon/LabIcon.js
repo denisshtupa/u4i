@@ -1,5 +1,5 @@
 import React from 'react'
-import { lochmara, pistachio, white } from './Constants/Constants';
+import { lochmara, pistachio, white } from '../Constants/Constants';
 
 const LabIcon = ({ cx = 250, cy = 250, strokeColor = pistachio, toggleColor, ...props }) => {
 

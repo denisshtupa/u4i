@@ -1,5 +1,5 @@
 import React from 'react';
-import { frenchGray, lochmara, white } from './Constants/Constants';
+import { frenchGray, lochmara, white } from '../Constants/Constants';
 
 const ToggleOn = ({ x = 300, y = 300, onToggleClick }) => {
 

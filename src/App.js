@@ -7,8 +7,8 @@ import PathLine from './icons/PathLine';
 import CircleIcon from './icons/CircleIcon';
 import StartIconG from './icons/StartIconG';
 import WeekContent from './icons/WeekContent';
-import LeftArrow from './icons/LeftArrow';
-import RightArrow from './icons/RightArrow';
+import LeftArrow from './icons/topicsIcon/LeftArrow';
+import RightArrow from './icons/topicsIcon/RightArrow';
 
 
 const randomNumber = Math.floor(Math.random() * 8) + 2;
@@ -181,6 +181,7 @@ const App = () => {
           {weekTopics.some(it => it.visible && it.weekId < (10000 + weekTopics.length-1)) && <RightArrow x={xOfEnd + 70} y={150} onNextWeek={nextWeekHandle}/>}
         </>
       }
+
 
 
 

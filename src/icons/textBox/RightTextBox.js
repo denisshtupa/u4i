@@ -1,4 +1,5 @@
 import React from 'react';
+import { white } from '../Constants/Constants';
 
 const RightTextBox = ({ x = 200, y = 200 }) => {
     const pathD = `M${x},${y}l5.368,-9.622v-5.927h154.471v30.818h-154.401v-6.066z`;
@@ -7,7 +8,7 @@ const RightTextBox = ({ x = 200, y = 200 }) => {
 
     return (
         <svg>
-            <defs>
+           <defs>
                 <filter
                     id="filter6337"
                     width="1.006"
@@ -21,12 +22,11 @@ const RightTextBox = ({ x = 200, y = 200 }) => {
             </defs>
             <g>
                 <path
-                    fill="none"
+                    fill={white}
                     stroke="#000"
                     strokeWidth="0.265"
-                    d={pathD}
                     filter="url(#filter6337)"
-                    opacity="0.25"
+                    d={pathD}
                 ></path>
                 <text
                     style={{ lineHeight: "1.25" }}
@@ -37,10 +37,10 @@ const RightTextBox = ({ x = 200, y = 200 }) => {
                     fontFamily="sans-serif"
                     fontSize="4.351"
                 >
-                    <tspan x={x+11} y={y-4} strokeWidth="0.109">
+                    <tspan x={x + 11} y={y - 4} strokeWidth="0.109">
                         Denis text{" "}
                     </tspan>
-                    <tspan x={x+11} y={y-4+lineHeight}  strokeWidth="0.109">
+                    <tspan x={x + 11} y={y - 4 + lineHeight} strokeWidth="0.109">
                         test lines
                     </tspan>
                     {/* <tspan x={x+9} y={y+11+lineHeight*2}  strokeWidth="0.109">

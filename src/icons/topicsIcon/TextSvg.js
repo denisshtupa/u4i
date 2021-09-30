@@ -1,5 +1,5 @@
 import React from 'react'
-import { fontFamily, fontSize, lochmara } from './Constants/Constants'
+import { fontFamily, fontSize, lochmara } from '../Constants/Constants'
 
 const TextSvg = ({x = 78, y = 125, text = "10 min", textColor = lochmara, toggleColor }) => {
 

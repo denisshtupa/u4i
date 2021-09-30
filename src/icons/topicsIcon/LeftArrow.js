@@ -1,5 +1,5 @@
 import React from 'react';
-import { frenchGray } from './Constants/Constants';
+import { frenchGray } from '../Constants/Constants';
 
 const LeftArrow = ({ x = 100, y = 400, onPreviousWeek }) => {
 

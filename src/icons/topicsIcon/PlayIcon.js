@@ -1,8 +1,9 @@
 import React from 'react';
-import { lochmara, white, pistachio } from "./Constants/Constants";
+import { lochmara, white, pistachio } from "../Constants/Constants";
 
 
 const PlayIcon = ({ cx = 250, cy = 250, strokeColor = pistachio, toggleColor, ...props }) => {
+
     const radius = 15;
     const pathD = `M${cx - 2.025} ${cy - 6.217}v12.618l6.8-6.309z`
     return (
@@ -21,7 +22,6 @@ const PlayIcon = ({ cx = 250, cy = 250, strokeColor = pistachio, toggleColor, ..
                     stroke={strokeColor === pistachio ? white : lochmara}
                     strokeWidth="0.9"
                     d={pathD}
-                // d="M${cx} ${cy}v12.618l6.8-6.309z"
                 ></path>
             </g>
         </svg>

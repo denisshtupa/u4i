@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import BranchLeft from './branches/BranchLeft';
+import BranchLeftOptional from './branches/BranchLeftOptional';
+import BranchRight from './branches/BranchRight';
+import BranchRightOptional from './branches/BranchRightOptional';
 import { pistachio, white } from './Constants/Constants';
-import LabIcon from './LabIcon';
-import LeftTextBox from './LeftTextBox';
+import LabIcon from './topicsIcon/LabIcon';
+import LeftTextBox from './textBox/LeftTextBox';
 import PathLine from './PathLine';
-import PlayIcon from './PlayIcon';
-import RightTextBox from './RightTextBox';
-import TextSvg from './TextSvg';
-import ToggleOff from './ToggleOff';
-import ToggleOn from './ToggleOn';
-import UsersAvatarIcon from './UsersAvatarIcon';
+import PlayIcon from './topicsIcon/PlayIcon';
+import RightTextBox from './textBox/RightTextBox';
+import TextSvg from './topicsIcon/TextSvg';
+import ToggleOff from './topicsIcon/ToggleOff';
+import ToggleOn from './topicsIcon/ToggleOn';
+import UsersAvatarIcon from './topicsIcon/UsersAvatarIcon';
 
 const WeekContent = ({ strokeColor = pistachio, startX, startY, xOfEnd, numberOfTopics = 5, numberOfWeeks = 3, visibleItem = {} }) => {
     const [fill, setFill] = useState(pistachio);
@@ -46,8 +50,6 @@ const WeekContent = ({ strokeColor = pistachio, startX, startY, xOfEnd, numberOf
     }
 
     const iconType = (icon) => {
-        console.log("🚀 ~ file: WeekContent.js ~ line 62 ~ iconType ~ icon", icon)
-
         let randomNumber = Math.floor(Math.random() * 3) + 1;
 
         switch (randomNumber) {
@@ -76,9 +78,6 @@ const WeekContent = ({ strokeColor = pistachio, startX, startY, xOfEnd, numberOf
     
     const showDetailsBox = () => {
         return calculateNumberOfPaths().map(textBox => detailsBoxDirection(textBox));
-        // console.log("🚀 ~ file: WeekContent.js ~ line 65 ~ showDetailsBox ~ array", array)
-        // console.log("🚀 ~ file: WeekContent.js ~ line 69 ~ showDetailsBox ~ numberOfWeeks", numberOfWeeks)
-        // console.log("🚀 ~ file: WeekContent.js ~ line 69 ~ showDetailsBox ~ visibleItem", visibleItem)
     }
     
     const detailsBoxDirection = (icon) => {
@@ -109,6 +108,18 @@ const WeekContent = ({ strokeColor = pistachio, startX, startY, xOfEnd, numberOf
 
     return (
         <svg >
+            
+            <BranchLeft/>
+            <BranchLeft koefDev={2}/>
+
+            <BranchRight koefDev={1}/>
+
+            <BranchRight koefDev={2}/>
+            <BranchRight koefDev={3}/>
+
+            {/* <BranchRightOptional /> */}
+            {/* <BranchLeftOptional />  */}
+            
             {/* Calculate icons */}
             {
                 showIcons()
